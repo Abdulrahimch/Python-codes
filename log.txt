@@ -1,0 +1,18 @@
+
+R3>
+R3>
+R3>terminal length 0
+R3>
+R3>terminal width 511
+R3>
+R3>
+R3>
+R3>enable
+Password: 
+Password: 
+Password: 
+% Bad secrets
+
+R3>
+R3>
+R3>

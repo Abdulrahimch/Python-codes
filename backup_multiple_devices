@@ -2,19 +2,19 @@ from netmiko import ConnectHandler
 with open("ip-address", "r") as f:
     devices_ip = f.read().splitlines()
 for i in devices_ip:    
-    device={'device_type':'cisco_ios', 'ip' : ip, 'username' : 'cisco', 'password' : 'cisco'}
-    print("connectiong to device " + ip)
+    device={'device_type':'cisco_ios', 'ip' : i, 'username' : 'cisco', 'password' : 'cisco', "port" : 22,  "secret" : "cisco", "session_log" : "log.txt", "default_enter" : "\r\n"}
+    print("connectiong to device " + i)
     connection=ConnectHandler(**device)
     print("moving to the enable mode")
     connection.enable()
     output = connection.send_command("show run")
-    prompt = connection.prompt()
+    prompt = connection.find_prompt()
     prompt = prompt[:-1]
     import datetime
-    now = datetime.datetim.now()
+    now = datetime.datetime.now()
     today = str(now.year) + "-"  + str(now.month) +"-" + str(now.day)
-    file = today + "--" + prompt 
-    with open(file + 'txt", "w") as backup:
+    file = today + "--" + prompt + "."
+    with open(file + "txt", "w") as backup:
         backup.write(output)
     print("backup has been completed succesfully")
     print("#" * 30)

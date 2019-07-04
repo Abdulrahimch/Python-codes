@@ -1,0 +1,8 @@
+int loop 0 
+ip add 3.3.3.3 255.255.255.0
+no sh 
+
+rotuer ospf 1
+network 0.0.0.0 0.0.0.0 area 0 
+router-id 3.3.3.3
+

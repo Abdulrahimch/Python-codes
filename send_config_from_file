@@ -1,0 +1,15 @@
+from netmiko import ConnectHandler
+with open("ip-address", "r") as f:
+    device_ip=f.read().splitlines()
+for ip in device_ip:
+    device={'device_type':'cisco_ios', 'ip' : ip, 'username' : 'cisco', 'password' : 'cisco'}
+    connection=ConnectHandler(**device)
+    print("Entering the enable mode.....")
+    connection.enable()
+    file=input("Connecting to" + str(ip) + " ,  "  + "Enter the config file...")
+    output = connection.send_config_from_file(input)
+    print(output)
+
+
+connection.disconnect()
+

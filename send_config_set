@@ -1,0 +1,13 @@
+from netmiko import ConnectHandler
+device={'device_type':'cisco_ios', 'ip' : '192.168.1.1', 'username' : 'cisco', 'password' : 'cisco'}
+connection=ConnectHandler(**device)
+
+connection.enable()
+commands=['int loop 0', 'ip address 1.1.1.1 255.255.255.0', 'exit', 'username abood secret abood']
+
+output = connection.send_config_set(commmands)
+ 
+output = connection.send_command_expect('write')
+
+connection.disconnect()
+

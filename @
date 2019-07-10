@@ -1,0 +1,6 @@
+import multifile
+with open("multifile", "r") as f:
+    device=f.read().splitlines()
+
+device=device[:-1]
+print(device)

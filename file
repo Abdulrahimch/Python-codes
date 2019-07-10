@@ -1,0 +1,4 @@
+cisco_ios:192.168.1.1:admin:cisco
+linux:192.168.1.100:ubuntu:root
+junnipor:192.168.1.55:cisco:cisco
+

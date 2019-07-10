@@ -1,0 +1,59 @@
+import ven_file
+from netmiko import ConnectHandler
+
+### Converting the file containing the multi-vendor-devices' file to a list of sublists to control them.###
+
+with open("ven_file", "r") as f:
+    file=f.read().splitlines()
+
+all_devices=list()
+file=file[:-1]
+for  i in file :
+    all_devices.append(i.split())
+
+#### here done! now we have a list of sublists, each contain a different vendor credintials.###
+
+###here we will loop over each device and prompt the right config-file to get it configured.###
+for device in all_devices:
+    net_device={
+        'device_type':device[0],
+        'ip': device[1],
+        'username': device[2],
+        'password': device[3],
+        'port' : 22,
+        'secret':device[3]'
+
+}
+    connection=ConnectHandler(**net_device) 
+    
+    if not connection.check_enable_mode():
+        connection.enable()
+
+    ##Prompt the config-file
+    config_file=input("please Enter the configuration file" + device[0] + "with ip " + device[1])   
+
+    print("Issuing commands...")
+   
+    with open ("config_file") as config:
+        commands=config.read().splitlines()
+    
+    output = connection.send_config_set(commands)
+    print(output)
+   
+   print(disconnection)
+   print("#"*40)
+   connection.disconnect()
+
+
+
+
+
+        
+    
+
+
+
+
+
+
+
